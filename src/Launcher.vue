@@ -28,6 +28,7 @@
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
       @close="close"
+      @clickChatId="clickChatId"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
@@ -243,6 +244,10 @@ export default {
     openAndFocus() {
       this.open()
       this.$root.$emit('focusUserInput')
+    },
+    clickChatId(user_id){
+      console.log("oiasas", user_id)
+      this.$emit('clickChatId', user_id);
     }
   }
 }
