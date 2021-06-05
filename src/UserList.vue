@@ -6,9 +6,12 @@
           <td style="text-align: center;">
             <img :src="user.imageUrl" class="img-msg" />
           </td>
-          <td class="user-element" :style="{color: userListColor.userList.text}">
-            {{ user.name }}
-          </td>
+            <td class="user-element" :style="{color: userListColor.userList.text}">
+              <a style="cursor: pointer" @click="toggleUserList(user.id)" >
+                {{ user.name }}
+              </a>
+            </td>
+          
         </tr>
       </tbody>
     </table>
@@ -27,6 +30,11 @@ export default {
       default: () => ({})
     }
   },
+  data() {
+    return {
+      inUserList: true
+    }
+  },
   computed: {
     userListColor() {
       const defaultColors = {
@@ -36,6 +44,13 @@ export default {
         }
       }
       return Object.assign(defaultColors, this.colors)
+    }
+  },
+  methods: {
+    toggleUserList(user_id) {
+      console.log("clicouuyy", user_id)
+      this.inUserList = !this.inUserList
+      this.$emit('userList', this.inUserList, user_id)
     }
   }
 }

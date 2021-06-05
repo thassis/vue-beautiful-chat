@@ -2,8 +2,9 @@
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
-      :title="title"
+      :title="headerTitle"
       :colors="colors"
+      :InUserList="!showUserList"
       @close="$emit('close')"
       @userList="handleUserListToggle"
     >
@@ -11,7 +12,7 @@
         <slot name="header"> </slot>
       </template>
     </Header>
-    <UserList v-if="showUserList" :colors="colors" :participants="participants" />
+    <UserList v-if="showUserList" :colors="colors" :participants="participants" @userList="handleUserListToggle" />
     <MessageList
       v-if="!showUserList"
       :messages="messages"
@@ -127,7 +128,8 @@ export default {
   },
   data() {
     return {
-      showUserList: false
+      showUserList: true,
+      headerTitle: "Lista de Canais"
     }
   },
   computed: {
@@ -138,8 +140,14 @@ export default {
     }
   },
   methods: {
-    handleUserListToggle(showUserList) {
-      this.showUserList = showUserList
+    handleUserListToggle(showUserList, user_id) {
+      this.showUserList = showUserList;
+      if(showUserList){
+        this.headerTitle = "Lista de Canais";
+      } else {
+        this.$emit("clickchatid", user_id);
+        this.headerTitle = "Chat #"+user_id;
+      }
     },
     getSuggestions() {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
