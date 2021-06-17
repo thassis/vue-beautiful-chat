@@ -1,8 +1,8 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <slot>
-      <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList">
-        <img src="./assets/arrow_back.png" width="25" height="25">
+      <div v-if="InUserList" class="sc-header--title enabled" @click="toggleUserList">
+        <img src="./assets/arrow_back.png" width="25" height="25" />
         {{ title }}
       </div>
       <div v-else class="sc-header--title">{{ title }}</div>
@@ -38,7 +38,7 @@ export default {
       type: Object,
       required: true
     },
-    InUserList:{
+    InUserList: {
       type: Boolean,
       required: true
     }
@@ -49,15 +49,14 @@ export default {
     }
   },
   created() {
-    console.log("oi", this.InUserList);
-    this.inUserlist = this.InUserList;
+    this.inUserlist = this.InUserList
   },
   computed: {
     ...mapState(['disableUserListToggle', 'titleImageUrl', 'showCloseButton'])
   },
   methods: {
     toggleUserList() {
-      this.inUserList = !this.inUserList;
+      this.inUserList = !this.inUserList
       this.$emit('userList', true)
     }
   }

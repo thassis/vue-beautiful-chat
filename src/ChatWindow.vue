@@ -4,15 +4,20 @@
       v-if="showHeader"
       :title="headerTitle"
       :colors="colors"
-      :InUserList="!showUserList"
-      @close="$emit('close')"
+      :in-user-list="!showUserList"
+      @close="closeChat"
       @userList="handleUserListToggle"
     >
       <template>
         <slot name="header"> </slot>
       </template>
     </Header>
-    <UserList v-if="showUserList" :colors="colors" :participants="participants" @userList="handleUserListToggle" />
+    <UserList
+      v-if="showUserList"
+      :colors="colors"
+      :participants="participants"
+      @userList="handleUserListToggle"
+    />
     <MessageList
       v-if="!showUserList"
       :messages="messages"
@@ -129,28 +134,33 @@ export default {
   data() {
     return {
       showUserList: true,
-      headerTitle: "Lista de Canais"
+      headerTitle: 'Lista de Canais'
     }
   },
   computed: {
     messages() {
-      let messages = this.messageList;
-      console.log("teste", messages);
+      let messages = this.messageList
+      console.log('teste', messages)
       return messages
     }
   },
   methods: {
     handleUserListToggle(showUserList, user_id) {
-      this.showUserList = showUserList;
-      if(showUserList){
-        this.headerTitle = "Lista de Canais";
+      this.showUserList = showUserList
+      if (showUserList) {
+        this.headerTitle = 'Lista de Canais'
       } else {
-        this.$emit("clickChatId", user_id);
-        this.headerTitle = "Chat #"+user_id;
+        this.$emit('clickChatId', user_id)
+        this.headerTitle = 'Chat #' + user_id
       }
     },
     getSuggestions() {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
+    },
+    closeChat() {
+      this.headerTitle = 'Lista de Canais'
+      this.showUserList = true
+      this.$emit('close')
     }
   }
 }
