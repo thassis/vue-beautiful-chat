@@ -29,6 +29,7 @@
       :message-styling="messageStyling"
       @close="close"
       @clickChatId="clickChatId"
+      @returnedToList="$emit('returnedToList')"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"

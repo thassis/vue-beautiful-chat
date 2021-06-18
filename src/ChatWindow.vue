@@ -148,7 +148,8 @@ export default {
     handleUserListToggle(showUserList, user_id) {
       this.showUserList = showUserList
       if (showUserList) {
-        this.headerTitle = 'Lista de Canais'
+        this.headerTitle = 'Lista de Canais';
+        this.$emit('returnedToList');
       } else {
         this.$emit('clickChatId', user_id)
         this.headerTitle = 'Chat #' + user_id
