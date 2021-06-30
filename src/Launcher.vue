@@ -27,6 +27,8 @@
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
+      :disable-user-list-toggle="disableUserListToggle"
+      :header-title-launcher="headerTitle"
       @close="close"
       @clickChatId="clickChatId"
       @returnedToList="$emit('returnedToList')"
@@ -220,6 +222,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      headerTitle: ""
+    }
+  },
   computed: {
     chatWindowTitle() {
       if (this.title !== '') return this.title
@@ -249,6 +256,9 @@ export default {
     clickChatId(user_id){
       console.log("oiasas", user_id)
       this.$emit('clickChatId', user_id);
+    },
+    changeHeaderTitle(title){      
+      this.headerTitle = title;
     }
   }
 }

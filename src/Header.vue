@@ -1,7 +1,11 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <slot>
-      <div v-if="InUserList" class="sc-header--title enabled" @click="toggleUserList">
+      <div v-if="disableUserListToggle" class="sc-header--title enabled">
+        {{ title }}
+      </div>
+
+      <div v-else-if="InUserList" class="sc-header--title enabled" @click="toggleUserList">
         <img src="./assets/arrow_back.png" width="25" height="25" />
         {{ title }}
       </div>

@@ -2,7 +2,7 @@
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
-      :title="headerTitle"
+      :title="headerTitleLauncher ? headerTitleLauncher: headerTitle"
       :colors="colors"
       :in-user-list="!showUserList"
       @close="closeChat"
@@ -129,6 +129,14 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
+    },
+    disableUserListToggle: {
+      type: Boolean,
+      required: true
+    },
+    headerTitleLauncher: {
+      type: String,
+      required: false
     }
   },
   data() {
@@ -136,6 +144,12 @@ export default {
       showUserList: true,
       headerTitle: 'Lista de Canais'
     }
+  },
+  created() {
+    if(this.disableUserListToggle) {
+      this.showUserList = false;
+      this.headerTitle = "Chat";
+    };
   },
   computed: {
     messages() {
