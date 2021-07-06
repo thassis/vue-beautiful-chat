@@ -1,10 +1,10 @@
 <template>
-  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
+  <div @mouseout="$emit('mouseOutWindow')" @mouseover="$emit('mouseOverWindow')" class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
       :title="headerTitleLauncher ? headerTitleLauncher: headerTitle"
       :colors="colors"
-      :in-user-list="!showUserList"
+      :in-user-list="!showUserList || disableUserListToggle"
       @close="closeChat"
       @userList="handleUserListToggle"
     >
@@ -13,13 +13,13 @@
       </template>
     </Header>
     <UserList
-      v-if="showUserList"
+      v-if="showUserList && !disableUserListToggle"
       :colors="colors"
       :participants="participants"
       @userList="handleUserListToggle"
     />
     <MessageList
-      v-if="!showUserList"
+      v-if="!showUserList || disableUserListToggle"
       :messages="messages"
       :participants="participants"
       :show-typing-indicator="showTypingIndicator"
@@ -51,7 +51,7 @@
       </template>
     </MessageList>
     <UserInput
-      v-if="!showUserList"
+      v-if="!showUserList || disableUserListToggle"
       :show-emoji="showEmoji"
       :on-submit="onUserInputSubmit"
       :suggestions="getSuggestions()"

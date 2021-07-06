@@ -36,6 +36,8 @@
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
+      @mouseOutWindow="$emit('mouseOutWindow')"
+      @mouseOverWindow="$emit('mouseOverWindow')"
     >
       <template v-slot:header>
         <slot name="header"> </slot>
