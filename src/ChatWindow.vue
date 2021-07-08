@@ -51,7 +51,7 @@
       </template>
     </MessageList>
     <UserInput
-      v-if="!showUserList || disableUserListToggle"
+      v-if="(!showUserList || disableUserListToggle) && !hideInputMessage"
       :show-emoji="showEmoji"
       :on-submit="onUserInputSubmit"
       :suggestions="getSuggestions()"
@@ -135,6 +135,10 @@ export default {
       required: true
     },
     headerTitleLauncher: {
+      type: String,
+      required: false
+    },
+    hideInputMessage: {
       type: String,
       required: false
     }

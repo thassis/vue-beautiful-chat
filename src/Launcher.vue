@@ -29,6 +29,7 @@
       :message-styling="messageStyling"
       :disable-user-list-toggle="disableUserListToggle"
       :header-title-launcher="headerTitle"
+      :hideInputMessage="hideInputMessage"
       @close="close"
       @clickChatId="clickChatId"
       @returnedToList="$emit('returnedToList')"
@@ -220,6 +221,10 @@ export default {
       default: () => false
     },
     disableUserListToggle: {
+      type: Boolean,
+      default: false
+    },
+    hideInputMessage: {
       type: Boolean,
       default: false
     }
