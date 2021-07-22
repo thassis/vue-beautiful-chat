@@ -1,8 +1,13 @@
 <template>
-  <div @mouseout="$emit('mouseOutWindow')" @mouseover="$emit('mouseOverWindow')" class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
+  <div
+    class="sc-chat-window"
+    :class="{opened: isOpen, closed: !isOpen}"
+    @mouseout="$emit('mouseOutWindow')"
+    @mouseover="$emit('mouseOverWindow')"
+  >
     <Header
       v-if="showHeader"
-      :title="headerTitleLauncher ? headerTitleLauncher: headerTitle"
+      :title="headerTitleLauncher ? headerTitleLauncher : headerTitle"
       :colors="colors"
       :in-user-list="!showUserList || disableUserListToggle"
       @close="closeChat"
@@ -139,7 +144,8 @@ export default {
       required: false
     },
     hideInputMessage: {
-      type: String,
+      type: Boolean,
+      default: false,
       required: false
     }
   },
@@ -149,12 +155,6 @@ export default {
       headerTitle: 'Lista de Canais'
     }
   },
-  created() {
-    if(this.disableUserListToggle) {
-      this.showUserList = false;
-      this.headerTitle = "Chat";
-    };
-  },
   computed: {
     messages() {
       let messages = this.messageList
@@ -162,12 +162,18 @@ export default {
       return messages
     }
   },
+  created() {
+    if (this.disableUserListToggle) {
+      this.showUserList = false
+      this.headerTitle = 'Chat'
+    }
+  },
   methods: {
     handleUserListToggle(showUserList, user_id) {
       this.showUserList = showUserList
       if (showUserList) {
-        this.headerTitle = 'Lista de Canais';
-        this.$emit('returnedToList');
+        this.headerTitle = 'Lista de Canais'
+        this.$emit('returnedToList')
       } else {
         this.$emit('clickChatId', user_id)
         this.headerTitle = 'Chat #' + user_id
