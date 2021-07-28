@@ -15,7 +15,7 @@
                     <td>
                       <a
                         style="color: #4f4f4f; font-weight: bold; font-size: 16px; cursor: pointer"
-                        @click="toggleUserList(user.id)"
+                        @click="toggleUserList(user.request_id ? user.request_id : user.id)"
                       >
                         {{ user.name }}
                       </a>
@@ -25,7 +25,7 @@
                     <td style="display: flex">
                       <a
                         style="text-align: end; color: #aaaa; font-size: 14px; cursor: pointer"
-                        @click="toggleUserList(user.id)"
+                        @click="toggleUserList(user.request_id ? user.request_id : user.id)"
                       >
                         {{ user.lastMessage }}
                       </a>
@@ -48,7 +48,7 @@
                   background-color: #ff4646;
                   border-radius: 15px;
                 "
-                @click="toggleUserList(user.id)"
+                @click="toggleUserList(user.request_id ? user.request_id : user.id)"
               >
                 {{ user.unreadMsgUser }}
               </a>
