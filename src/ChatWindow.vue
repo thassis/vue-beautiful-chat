@@ -169,14 +169,14 @@ export default {
     }
   },
   methods: {
-    handleUserListToggle(showUserList, user_id) {
+    handleUserListToggle(showUserList, user_id, request_id = 0) {
       this.showUserList = showUserList
       if (showUserList) {
         this.headerTitle = 'Lista de Canais'
         this.$emit('returnedToList')
       } else {
         this.$emit('clickChatId', user_id)
-        this.headerTitle = 'Chat #' + user_id
+        this.headerTitle = 'Chat #' + request_id
       }
     },
     getSuggestions() {

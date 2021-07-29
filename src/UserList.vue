@@ -15,7 +15,7 @@
                     <td>
                       <a
                         style="color: #4f4f4f; font-weight: bold; font-size: 16px; cursor: pointer"
-                        @click="toggleUserList(user.request_id ? user.request_id : user.id)"
+                        @click="toggleUserList(user.id, user.request_id)"
                       >
                         {{ user.name }}
                       </a>
@@ -25,7 +25,7 @@
                     <td style="display: flex">
                       <a
                         style="text-align: end; color: #aaaa; font-size: 14px; cursor: pointer"
-                        @click="toggleUserList(user.request_id ? user.request_id : user.id)"
+                        @click="toggleUserList(user.id, user.request_id)"
                       >
                         {{ user.lastMessage }}
                       </a>
@@ -48,7 +48,7 @@
                   background-color: #ff4646;
                   border-radius: 15px;
                 "
-                @click="toggleUserList(user.request_id ? user.request_id : user.id)"
+                @click="toggleUserList(user.id, user.request_id)"
               >
                 {{ user.unreadMsgUser }}
               </a>
@@ -89,10 +89,9 @@ export default {
     }
   },
   methods: {
-    toggleUserList(user_id) {
-      console.log('clicouuyy', user_id)
+    toggleUserList(user_id, request_id = 0) {
       this.inUserList = !this.inUserList
-      this.$emit('userList', this.inUserList, user_id)
+      this.$emit('userList', this.inUserList, user_id, request_id)
     }
   }
 }
